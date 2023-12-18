@@ -2,7 +2,7 @@ const db = require('../database')
 const bcrypt = require('bcrypt')
 const user = db.user
 
-const createNewUser = async (req, res) => {
+const signUp = async (req, res) => {
     let { email, password } = req.body
     const hashedPassword = bcrypt.hashSync(password, 10)
 
@@ -14,7 +14,7 @@ const createNewUser = async (req, res) => {
     })
 }
 
-const authenticate = async (req, res) => {
+const logIn = async (req, res) => {
     const { email, password } = req.body
 
     const data = await user.findOne({ where: { email } })
@@ -42,4 +42,4 @@ const authenticate = async (req, res) => {
 
 }
 
-module.exports = { createNewUser, authenticate }
+module.exports = { signUp, logIn }
